@@ -8,11 +8,13 @@ log () {
  local mark=`date +%Y/%m/%d-%H:%M:%S`
  echo "[ $mark ] $msg"
  echo "[ $mark ] $msg" >> "$log_file"
+ true
 }
 
 clear_log () {
  local mark=`date +%Y/%m/%d-%H:%M:%S`
  echo "[ $mark ] logfile cleared" > "$log_file"
+ true
 }
 
 check_error () {
