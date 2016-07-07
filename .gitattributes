@@ -2,4 +2,5 @@
 *.sh.in text eol=lf
 *.bat text eol=crlf
 *.ps1 eol=crlf
+*.exe binary
 
