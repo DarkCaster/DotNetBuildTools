@@ -3,4 +3,5 @@
 *.bat text eol=crlf
 *.ps1 eol=crlf
 *.exe binary
+*.zip binary
 
