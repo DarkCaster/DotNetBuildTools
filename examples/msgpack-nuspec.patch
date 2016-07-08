@@ -1,0 +1,15 @@
+diff -uprN msgpack.old/MsgPack.nuspec msgpack/MsgPack.nuspec
+--- msgpack.old/MsgPack.nuspec	2016-06-28 20:20:50.000000000 +0300
++++ msgpack/MsgPack.nuspec	2016-07-08 12:26:33.974090802 +0300
+@@ -86,7 +86,7 @@ This package provides MessagePack serial
+     </dependencies>
+   </metadata>
+   <files>
+-    <file src="bin\**\*.dll" target="lib" exclude="**\System.*;**\Microsoft.*;**\Mono.*" />
+-    <file src="bin\**\*.XML" target="lib" exclude="**\System.*;**\Microsoft.*;**\Mono.*" />
++    <file src="bin/**/*.dll" target="lib" exclude="**/System.*;**/Microsoft.*;**/Mono.*" />
++    <file src="bin/**/*.XML" target="lib" exclude="**/System.*;**/Microsoft.*;**/Mono.*" />
+   </files>
+-</package>
+\ No newline at end of file
++</package>
