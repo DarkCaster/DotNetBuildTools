@@ -83,7 +83,7 @@ do
   cd "$olddir"
   exit 1
  fi
-done <<< "$(find . -iname '*.recipe' -type f)"
+done <<< "$(find * -maxdepth 1 -iname '*.recipe' -type f)"
 
 cd "$olddir"
 check_error
