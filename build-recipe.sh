@@ -1,21 +1,21 @@
 #!/bin/bash
 
-recepie="$1"
+recipe="$1"
 
 script_dir="$( cd "$( dirname "$0" )" && pwd )"
 
 . "$script_dir"/service-funcs.sh.in
 
-test ! -f "$recepie" && log "recepie file $recepie is not available, exiting" && exit 1
+test ! -f "$recipe" && log "recipe file $recipe is not available, exiting" && exit 1
 
-log "loading $recepie recepie"
+log "loading $recipe recipe"
 
-. "$recepie"
+. "$recipe"
 check_error
 
-test "z$src" = "z" && log "recepie file $recepie does not have src parameter" && exit 1
-test "z$files" = "z" && log "recepie file $recepie does not have files parameter" && exit 1
-test "z$tgt" = "z" && log "recepie file $recepie does not have tgt parameter" && exit 1
+test "z$src" = "z" && log "recipe file $recipe does not have src parameter" && exit 1
+test "z$files" = "z" && log "recipe file $recipe does not have files parameter" && exit 1
+test "z$tgt" = "z" && log "recipe file $recipe does not have tgt parameter" && exit 1
 
 #files as array
 files=( $files )
@@ -38,7 +38,7 @@ cleanup () {
 
 check_error_cleanup () {
 if [ "$?" != "0" ]; then
- log "error detected while building $recepie"
+ log "error detected while building $recipe"
  cleanup
  exit 1
 fi
@@ -117,7 +117,7 @@ else
 fi
 fi
 
-log "build of $recepie recepie is complete"
+log "build of $recipe recipe is complete"
 cleanup
 exit 0
 
