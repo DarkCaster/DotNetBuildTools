@@ -13,13 +13,13 @@ log () {
 
 clear_log () {
  local mark=`date +%Y/%m/%d-%H:%M:%S`
- echo "[ $mark ] logfile cleared" > "$log_file"
+ echo "[ $mark ] Logfile cleared" > "$log_file"
  true
 }
 
 check_error () {
 if [ "$?" != "0" ]; then
- log "error detected in last command"
+ log "Error detected in last command"
  exit 1
 fi
 }
