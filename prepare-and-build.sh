@@ -24,13 +24,13 @@ fi
 temp_dir="$script_dir/temp"
 tools_dir="$temp_dir/tools"
 
-nuget_dir="$temp_dir/tools/nuget"
+nuget_dir="$tools_dir/nuget"
 nuget_exe="$nuget_dir/nuget.exe"
 nuget_exe_dist="$script_dir/dist/nuget/nuget-3.4.4.exe"
 
 
-cake_dir="$temp_dir/tools/cake"
-cake_exe="$temp_dir/tools/cake/Cake.exe"
+cake_dir="$tools_dir/cake"
+cake_exe="$cake_dir/Cake.exe"
 cake_dist="$script_dir/dist/cake/Cake-bin-v0.13.0.zip"
 
 if [ ! -d "$temp_dir" ]; then
@@ -80,6 +80,7 @@ do
  "$script_dir/build-recipe.sh" "$recipe"
  if [ "z$?" != "z0" ]; then
   log "Failed to build $recipe recipe"
+  cd "$olddir"
   exit 1
  fi
 done <<< "$(find . -iname '*.recipe' -type f)"
