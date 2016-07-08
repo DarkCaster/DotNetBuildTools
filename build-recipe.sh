@@ -6,16 +6,15 @@ script_dir="$( cd "$( dirname "$0" )" && pwd )"
 
 . "$script_dir"/service-funcs.sh.in
 
-test ! -f "$recipe" && log "recipe file $recipe is not available, exiting" && exit 1
+test ! -f "$recipe" && log "Recipe file $recipe is not available, exiting" && exit 1
 
-log "loading $recipe recipe"
+log "Loading $recipe recipe"
 
 . "$recipe"
 check_error
 
-test "z$src" = "z" && log "recipe file $recipe does not have src parameter" && exit 1
-test "z$files" = "z" && log "recipe file $recipe does not have files parameter" && exit 1
-test "z$tgt" = "z" && log "recipe file $recipe does not have tgt parameter" && exit 1
+test "z$src" = "z" && log "Recipe does not have src parameter" && exit 1
+test "z$tgt" = "z" && log "Recipe does not have tgt parameter" && exit 1
 
 #files as array
 files=( $files )
@@ -29,16 +28,16 @@ cake_exe="$tools_dir/cake/Cake.exe"
 export PATH="$tools_dir:$PATH"
 
 temp_dir=`mktemp -t build.XXXXXX -d -p "$temp_dir"`
-test ! -d "$temp_dir" && log "failed to create temp_dir, exiting" && exit 1
+test ! -d "$temp_dir" && log "Failed to create temp_dir, exiting" && exit 1
 
 cleanup () {
- log "cleaning up"
- rm -rfv "$temp_dir"
+ log "Cleaning up $temp_dir dir"
+ rm -rf "$temp_dir"
 }
 
 check_error_cleanup () {
 if [ "$?" != "0" ]; then
- log "error detected while building $recipe"
+ log "Error detected while building $recipe"
  cleanup
  exit 1
 fi
@@ -46,12 +45,12 @@ fi
 
 #copy or extract source tree
 if [ -f "$src.zip" ]; then
- log "extracting $src.zip to build dir"
+ log "Extracting $src.zip to build dir"
  unzip -q "$src.zip" -d "$temp_dir"
  check_error_cleanup
 else
 if [ -d "$src" ]; then
- log "copying $src to build dir"
+ log "Copying $src to build dir"
  cp -r "$src" "$temp_dir"
  check_error_cleanup
 else
@@ -63,11 +62,11 @@ fi
 
 #copy build script
 if [ -f "$src.cake" ]; then
- log "copying $src.cake file to build dir"
+ log "Copying $src.cake file to build dir"
  cp "$src.cake" "$temp_dir/build.cake"
  check_error_cleanup
 else
- log "cake build script $src.cake not found! exiting"
+ log "Cake build script $src.cake not found! exiting"
  cleanup
  exit 1
 fi
@@ -75,7 +74,7 @@ fi
 #copy extra files and patches
 for el in "${files[@]}"
 do
- log "copying $el file to build dir"
+ log "Copying $el file to build dir"
  cp "$el" "$temp_dir"
  check_error_cleanup
 done
@@ -83,10 +82,10 @@ done
 #run cake
 olddir="$PWD"
 cd "$temp_dir"
- log "running $src.cake build script"
+ log "Running $src.cake build script"
  CAKE_PATHS_TOOLS="$tools_dir" mono "$cake_exe"
  if [ "$?" != "0" ]; then
-  log "build failed!"
+  log "Build failed!"
   cd "$olddir"
   cleanup
   exit 1
@@ -95,29 +94,29 @@ cd "$olddir"
 
 #create output dir
 if [ ! -d "dist" ]; then
- log "creating dist dir"
+ log "Creating dist dir"
  mkdir -p "dist"
  check_error_cleanup
 fi
 
 #copy target to output dir
 if [ -d "$temp_dir/$tgt" ]; then
- log "copying $temp_dir/$tgt dir contents to dist dir"
+ log "Copying $temp_dir/$tgt dir contents to dist dir"
  cp "$temp_dir/$tgt"/* dist
  check_error_cleanup
 else
 if [ -f "$temp_dir/$tgt" ]; then
- log "copying $temp_dir/$tgt file to dist dir"
+ log "Copying $temp_dir/$tgt file to dist dir"
  cp "$temp_dir/$tgt" dist
  check_error_cleanup
 else
- log "build results at $temp_dir/$tgt is not found, exiting"
+ log "Build results at $temp_dir/$tgt is not found, exiting"
  cleanup
  exit 1
 fi
 fi
 
-log "build of $recipe recipe is complete"
+log "Build of $recipe recipe is complete"
 cleanup
 exit 0
 
