@@ -13,8 +13,14 @@ log "Loading $recipe recipe"
 . "$recipe"
 check_error
 
-test "z$src" = "z" && log "Recipe does not have src parameter" && exit 1
-test "z$tgt" = "z" && log "Recipe does not have tgt parameter" && exit 1
+test "z$sources" = "z" && log "Recipe does not have src parameter" && exit 1
+test "z$targets" = "z" && log "Recipe does not have tgt parameter" && exit 1
+
+#sources as array
+sources=( $sources )
+
+#sources as array
+targets=( $targets )
 
 #files as array
 files=( $files )
@@ -42,6 +48,18 @@ if [ "$?" != "0" ]; then
  exit 1
 fi
 }
+
+#copy extra files and patches
+for el in "${files[@]}"
+do
+ log "Copying $el file to build dir"
+ cp "$el" "$temp_dir"
+ check_error_cleanup
+done
+
+#process sources
+for src in "${sources[@]}"
+do
 
 #copy or extract source tree
 if [ -f "$src.zip" ]; then
@@ -71,14 +89,6 @@ else
  exit 1
 fi
 
-#copy extra files and patches
-for el in "${files[@]}"
-do
- log "Copying $el file to build dir"
- cp "$el" "$temp_dir"
- check_error_cleanup
-done
-
 #run cake
 olddir="$PWD"
 cd "$temp_dir"
@@ -92,12 +102,19 @@ cd "$temp_dir"
  fi
 cd "$olddir"
 
+#done processing sources
+done
+
 #create output dir
 if [ ! -d "dist" ]; then
  log "Creating dist dir"
  mkdir -p "dist"
  check_error_cleanup
 fi
+
+#process targets
+for tgt in "${targets[@]}"
+do
 
 #copy target to output dir
 if [ -d "$temp_dir/$tgt" ]; then
@@ -115,6 +132,9 @@ else
  exit 1
 fi
 fi
+
+#done processing targets
+done
 
 log "Build of $recipe recipe is complete"
 cleanup
