@@ -6,6 +6,8 @@ script_dir="$( cd "$( dirname "$0" )" && pwd )"
 
 . "$script_dir"/service-funcs.sh.in
 
+test "z$recipe" = "z" && log "You must pass recipe file as parameter. This script is not intended to be run as standalone - use prepare-and-build.sh script instead" && exit 1
+
 test ! -f "$recipe" && log "Recipe file $recipe is not available, exiting" && exit 1
 
 log "Loading $recipe recipe"
