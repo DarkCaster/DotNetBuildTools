@@ -33,7 +33,7 @@ $nuget_exe_dist="$script_dir\dist\nuget\nuget-3.4.4.exe"
 $cake_dir="$tools_dir\cake"
 $cake_exe="$cake_dir\Cake.exe"
 $cake_dist="$script_dir\dist\cake\Cake-bin-v0.13.0.zip"
-$cake_extra="$script_dir\roslyn"
+$cake_extra="$script_dir\dist\roslyn"
 
 $patch_dir="$tools_dir\patch"
 $patch_exe="$patch_dir\patch.exe"
@@ -88,7 +88,7 @@ if(!(Test-Path -PathType Leaf "$cake_exe"))
     unzip -File "$cake_dist" -Destination "$cake_dir"
     check_error
     log "Copying cake addons from $cake_extra"
-    Copy-Item -path "$cake_extra" -include "*.dll" -Destination "$cake_dir"
+    Copy-Item "$cake_extra\*" "$cake_dir" -Filter "*.dll" -Recurse
     check_error
 }
 
