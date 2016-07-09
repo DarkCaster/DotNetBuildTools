@@ -1,0 +1,1 @@
+Roslyn dlls binary distribution is prohibited now, but you can place your local dlls here. Theese dlls will be used instead of downloading when deploying cake
