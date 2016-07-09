@@ -1,4 +1,4 @@
 sources="msgpack"
 targets="MsgPack.Cli.0.0.0-development.nupkg"
-files="msgpack-nuspec.patch"
+files="msgpack-nuspec.patch msgpack-dot-net-version.patch"
 

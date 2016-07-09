@@ -1,10 +1,32 @@
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
-var buildDir = Directory("msgpack/bin/net452");
 
-Task("Clean").Does(() => { CleanDirectory(buildDir); });
+Task("Patch").Does(() =>
+{
+ var settings=new ProcessSettings()
+ {
+  WorkingDirectory = new DirectoryPath("msgpack"),
+  Arguments = new ProcessArgumentBuilder().Append("-p1").Append("-i").Append("../msgpack-nuspec.patch"),
+ };
 
-Task("Restore-NuGet-Packages").IsDependentOn("Clean").Does(() => { NuGetRestore("msgpack/MsgPack.sln"); });
+ if(IsRunningOnWindows())
+ { StartProcess("patch.exe",settings); }
+ else
+ { StartProcess("patch",settings); }
+
+ settings=new ProcessSettings()
+ {
+  WorkingDirectory = new DirectoryPath("msgpack"),
+  Arguments = new ProcessArgumentBuilder().Append("-p1").Append("-i").Append("../msgpack-dot-net-version.patch"),
+ };
+
+ if(IsRunningOnWindows())
+ { StartProcess("patch.exe",settings); }
+ else
+ { StartProcess("patch",settings); }
+});
+
+Task("Restore-NuGet-Packages").IsDependentOn("Patch").Does(() => { NuGetRestore("msgpack/MsgPack.sln"); });
 
 Task("Build").IsDependentOn("Restore-NuGet-Packages").Does(() =>
 {
@@ -27,22 +49,7 @@ Task("Pack").IsDependentOn("Build").Does(() =>
  NuGetPack("msgpack/MsgPack.nuspec", nuGetPackSettings);
 });
 
-Task("Patch").Does(() =>
-{
- var settings=new ProcessSettings()
- {
-  WorkingDirectory = new DirectoryPath("msgpack"),
-  Arguments = new ProcessArgumentBuilder().Append("-p1").Append("-i").Append("../msgpack-nuspec.patch"),
- };
-
- if(IsRunningOnWindows())
- { StartProcess("patch.exe",settings); }
- else
- { StartProcess("patch",settings); }
-});
 
 Task("Default").IsDependentOn("Pack");
-
-RunTarget("Patch");
 RunTarget(target);
 
