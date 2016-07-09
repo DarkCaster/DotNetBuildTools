@@ -134,10 +134,10 @@ Set-Location $curdir
 
 }
 
-if(!(Test-Path -PathType Container "$dist"))
+if(!(Test-Path -PathType Container "dist"))
 {
     log "Creating dist dir"
-    mkdir -Force "$dist" | Out-Null
+    mkdir -Force "dist" | Out-Null
     check_error_cleanup
 }
 
