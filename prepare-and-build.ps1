@@ -35,6 +35,10 @@ $cake_dir="$tools_dir\cake"
 $cake_exe="$cake_dir\Cake.exe"
 $cake_dist="$script_dir\dist\cake\Cake-bin-v0.13.0.zip"
 
+$patch_dir="$tools_dir\patch"
+$patch_exe="$patch_dir\patch.exe"
+$patch_dist="$script_dir\dist\patch\patch.zip"
+
 if(!(Test-Path "$temp_dir"))
 {
     log "Creating temp dir at $temp_dir"
@@ -55,7 +59,7 @@ if(!(Test-Path -PathType Leaf "$nuget_exe"))
     mkdir -Force "$nuget_dir" | Out-Null
     check_error
     log "Copying nuget exe from $nuget_exe_dist"
-    cp "$nuget_exe_dist" "$nuget_dir/nuget.exe"
+    cp "$nuget_exe_dist" "$nuget_dir\nuget.exe"
     check_error
 }
 
@@ -65,7 +69,17 @@ if(!(Test-Path -PathType Leaf "$cake_exe"))
     mkdir -Force "$cake_dir" | Out-Null
     check_error
     log "Extracting cake dist from $cake_dist"
-    unzip –File "$cake_dist" -Destination "$cake_dir"
+    unzip -File "$cake_dist" -Destination "$cake_dir"
+    check_error
+}
+
+if(!(Test-Path -PathType Leaf "$patch_exe"))
+{
+    log "Creating patch dir at $patch_dir"
+    mkdir -Force "$patch_dir" | Out-Null
+    check_error
+    log "Extracting patch dist from $patch_dist"
+    unzip -File "$patch_dist" -Destination "$patch_dir"
     check_error
 }
 
@@ -74,6 +88,8 @@ if ( $recipes_dir.Length -eq 0 )
     log "Exiting"
     exit 0
 }
+
+$env:Path += ";$patch_dir"
 
 $curdir=Get-Location
 
