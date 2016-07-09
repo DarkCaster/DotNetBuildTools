@@ -1,6 +1,15 @@
-diff -uprN msgpack.old/MsgPack.nuspec msgpack/MsgPack.nuspec
---- msgpack.old/MsgPack.nuspec	2016-07-03 16:48:42.000000000 +0300
-+++ msgpack/MsgPack.nuspec	2016-07-09 09:46:44.932970778 +0300
+diff -uprN msgpack/MsgPack.nuspec msgpack.new/MsgPack.nuspec
+--- msgpack/MsgPack.nuspec	2016-07-03 16:48:42.000000000 +0300
++++ msgpack.new/MsgPack.nuspec	2016-07-09 09:53:44.586713521 +0300
+@@ -3,7 +3,7 @@
+   <metadata>
+     <id>MsgPack.Cli</id>
+     <title>MessagePack for CLI</title>
+-    <version>0.0.0-development</version>
++    <version>0.7.0</version>
+     <authors>FUJIWARA, Yusuke</authors>
+     <owners>FUJIWARA, Yusuke</owners>
+     <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
 @@ -21,71 +21,13 @@ This package provides MessagePack serial
      <copyright>Copyright 2010-2016 FUJIWARA, Yusuke, all rights reserved.</copyright>
      <tags>MsgPack MessagePack Serialization Formatter Serializer</tags>
