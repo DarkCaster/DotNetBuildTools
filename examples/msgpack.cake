@@ -1,6 +1,8 @@
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
 
+Task("Restore-NuGet-Packages").Does(() => { NuGetRestore("msgpack/MsgPack.sln"); });
+
 Task("Patch").Does(() =>
 {
  var settings=new ProcessSettings()
@@ -26,9 +28,7 @@ Task("Patch").Does(() =>
  { StartProcess("patch",settings); }
 });
 
-Task("Restore-NuGet-Packages").IsDependentOn("Patch").Does(() => { NuGetRestore("msgpack/MsgPack.sln"); });
-
-Task("Build").IsDependentOn("Restore-NuGet-Packages").Does(() =>
+Task("Build").IsDependentOn("Patch").Does(() =>
 {
  if(IsRunningOnWindows())
  {
@@ -49,7 +49,5 @@ Task("Pack").IsDependentOn("Build").Does(() =>
  NuGetPack("msgpack/MsgPack.nuspec", nuGetPackSettings);
 });
 
-
 Task("Default").IsDependentOn("Pack");
 RunTarget(target);
-
