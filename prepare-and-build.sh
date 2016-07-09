@@ -1,6 +1,6 @@
 #!/bin/bash
 
-recepies_dir="$1"
+recipes_dir="$1"
 
 script_dir="$( cd "$( dirname "$0" )" && pwd )"
 
@@ -9,13 +9,13 @@ script_dir="$( cd "$( dirname "$0" )" && pwd )"
 #clear log
 clear_log
 
-if [ "z$recepies_dir" = "z" ]; then
- log "Recepies dir not specified. Only preparing build tools and env."
+if [ "z$recipes_dir" = "z" ]; then
+ log "recipes dir not specified. Only preparing build tools and env."
 else
- if [ -d "$recepies_dir" ]; then
-  log "Attempting to build recepies at $recepies_dir"
+ if [ -d "$recipes_dir" ]; then
+  log "Attempting to build recipes at $recipes_dir"
  else
-  log "Error: recepies dir at $recepies_dir does not exist"
+  log "Error: recipes dir at $recipes_dir does not exist"
   exit 1
  fi
 fi
@@ -64,13 +64,13 @@ if [ ! -f "$cake_exe" ]; then
  check_error
 fi
 
-if [ "z$recepies_dir" = "z" ]; then
+if [ "z$recipes_dir" = "z" ]; then
  log "Exiting"
  exit 0
 fi
 
 olddir="$PWD"
-cd "$recepies_dir"
+cd "$recipes_dir"
 check_error
 
 while read recipe

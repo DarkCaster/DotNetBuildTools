@@ -8,17 +8,17 @@ clear_log
 
 if ( $recipes_dir.Length -eq 0 )
 {
-    log "Recepies dir not specified. Only preparing build tools and env."
+    log "Recipes dir not specified. Only preparing build tools and env."
 }
 else
 {
     if( Test-Path "$recipes_dir" )
     {
-        log "Attempting to build recepies at $recipes_dir"
+        log "Attempting to build recipes at $recipes_dir"
     }
     else
     {
-        log "Error: recepies dir at $recipes_dir does not exist"
+        log "Error: recipes dir at $recipes_dir does not exist"
         exit 1
     }
 }
