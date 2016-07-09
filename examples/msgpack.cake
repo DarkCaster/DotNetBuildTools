@@ -44,7 +44,7 @@ Task("Pack").IsDependentOn("Build").Does(() =>
 {
  var nuGetPackSettings   = new NuGetPackSettings
  {
-  BasePath = "msgpack",
+  BasePath = "msgpack/bin",
  };
  NuGetPack("msgpack/MsgPack.nuspec", nuGetPackSettings);
 });

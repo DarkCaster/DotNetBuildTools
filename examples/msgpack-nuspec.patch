@@ -1,14 +1,81 @@
 diff -uprN msgpack.old/MsgPack.nuspec msgpack/MsgPack.nuspec
---- msgpack.old/MsgPack.nuspec	2016-06-28 20:20:50.000000000 +0300
-+++ msgpack/MsgPack.nuspec	2016-07-08 12:26:33.974090802 +0300
-@@ -86,7 +86,7 @@ This package provides MessagePack serial
+--- msgpack.old/MsgPack.nuspec	2016-07-03 16:48:42.000000000 +0300
++++ msgpack/MsgPack.nuspec	2016-07-09 09:46:44.932970778 +0300
+@@ -21,71 +21,13 @@ This package provides MessagePack serial
+     <copyright>Copyright 2010-2016 FUJIWARA, Yusuke, all rights reserved.</copyright>
+     <tags>MsgPack MessagePack Serialization Formatter Serializer</tags>
+     <dependencies>
+-      <group targetFramework=".NETFramework4.6.1" />
+-      <group targetFramework=".NETFramework4.5.2" />
+-      <group targetFramework=".NETFramework3.5" />
+-      <group targetFramework="WindowsPhone8.0" />
+-      <group targetFramework="MonoAndroid1.0" />
+-      <group targetFramework="MonoTouch1.0" />
+-      <group targetFramework="Xamarin.iOS1.0" />
+-      <group targetFramework=".NETStandard1.1">
+-        <dependency id="System.Collections" version="4.0.11" />
+-        <dependency id="System.Collections.Concurrent" version="4.0.12" />
+-        <dependency id="System.Diagnostics.Contracts" version="4.0.1" />
+-        <dependency id="System.Diagnostics.Debug" version="4.0.11" />
+-        <dependency id="System.Diagnostics.Tools" version="4.0.1" />
+-        <dependency id="System.Globalization" version="4.0.11" />
+-        <dependency id="System.IO" version="4.1.0" />
+-        <dependency id="System.Linq" version="4.1.0" />
+-        <dependency id="System.Linq.Expressions" version="4.1.0" />
+-        <dependency id="System.ObjectModel" version="4.0.12" />
+-        <dependency id="System.Reflection" version="4.1.0" />
+-        <dependency id="System.Reflection.Extensions" version="4.0.1" />
+-        <dependency id="System.Reflection.Primitives" version="4.0.1" />
+-        <dependency id="System.Resources.ResourceManager" version="4.0.1" />
+-        <dependency id="System.Runtime" version="4.1.0" />
+-        <dependency id="System.Runtime.Extensions" version="4.1.0" />
+-        <dependency id="System.Runtime.InteropServices" version="4.1.0" />
+-        <dependency id="System.Runtime.Numerics" version="4.0.1" />
+-        <dependency id="System.Runtime.Serialization.Primitives" version="4.1.1" />
+-        <dependency id="System.Text.Encoding" version="4.0.11" />
+-        <dependency id="System.Text.Encoding.Extensions" version="4.0.11" />
+-        <dependency id="System.Text.RegularExpressions" version="4.1.0" />
+-        <dependency id="System.Threading" version="4.0.11" />
+-      </group>
+-      <group targetFramework=".NETStandard1.3">
+-        <dependency id="System.Collections" version="4.0.11" />
+-        <dependency id="System.Collections.Concurrent" version="4.0.12" />
+-        <dependency id="System.Collections.NonGeneric" version="4.0.1" />
+-        <dependency id="System.Collections.Specialized" version="4.0.1" />
+-        <dependency id="System.Data.Common" version="4.1.0" />
+-        <dependency id="System.Diagnostics.Contracts" version="4.0.1" />
+-        <dependency id="System.Diagnostics.Debug" version="4.0.11" />
+-        <dependency id="System.Diagnostics.Tools" version="4.0.1" />
+-        <dependency id="System.Globalization" version="4.0.11" />
+-        <dependency id="System.IO" version="4.1.0" />
+-        <dependency id="System.Linq" version="4.1.0" />
+-        <dependency id="System.Linq.Expressions" version="4.1.0" />
+-        <dependency id="System.Numerics.Vectors" version="4.1.1" />
+-        <dependency id="System.ObjectModel" version="4.0.12" />
+-        <dependency id="System.Reflection" version="4.1.0" />
+-        <dependency id="System.Reflection.Extensions" version="4.0.1" />
+-        <dependency id="System.Reflection.Primitives" version="4.0.1" />
+-        <dependency id="System.Resources.ResourceManager" version="4.0.1" />
+-        <dependency id="System.Runtime" version="4.1.0" />
+-        <dependency id="System.Runtime.Extensions" version="4.1.0" />
+-        <dependency id="System.Runtime.InteropServices" version="4.1.0" />
+-        <dependency id="System.Runtime.Numerics" version="4.0.1" />
+-        <dependency id="System.Runtime.Serialization.Primitives" version="4.1.1" />
+-        <dependency id="System.Text.Encoding" version="4.0.11" />
+-        <dependency id="System.Text.Encoding.Extensions" version="4.0.11" />
+-        <dependency id="System.Text.RegularExpressions" version="4.1.0" />
+-        <dependency id="System.Threading" version="4.0.11" />
+-      </group>
++      <group targetFramework="net45" />
      </dependencies>
    </metadata>
    <files>
 -    <file src="bin\**\*.dll" target="lib" exclude="**\System.*;**\Microsoft.*;**\Mono.*" />
 -    <file src="bin\**\*.XML" target="lib" exclude="**\System.*;**\Microsoft.*;**\Mono.*" />
-+    <file src="bin/**/*.dll" target="lib" exclude="**/System.*;**/Microsoft.*;**/Mono.*" />
-+    <file src="bin/**/*.XML" target="lib" exclude="**/System.*;**/Microsoft.*;**/Mono.*" />
++    <file src="**/*.dll" target="lib" exclude="**/System.*;**/Microsoft.*;**/Mono.*" />
++    <file src="**/*.XML" target="lib" exclude="**/System.*;**/Microsoft.*;**/Mono.*" />
++	<file src="**/*.mdb" target="lib" exclude="**/System.*;**/Microsoft.*;**/Mono.*" />
++	<file src="**/*.pdb" target="lib" exclude="**/System.*;**/Microsoft.*;**/Mono.*" />
    </files>
 -</package>
 \ No newline at end of file
