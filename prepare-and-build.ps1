@@ -102,13 +102,13 @@ if(!(Test-Path -PathType Leaf "$patch_exe"))
     check_error
 }
 
+$env:Path += ";$patch_dir"
+
 if ( $recipes_dir.Length -eq 0 )
 {
     log "Exiting"
     exit 0
 }
-
-$env:Path += ";$patch_dir"
 
 $curdir=Get-Location
 
