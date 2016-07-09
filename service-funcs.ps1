@@ -26,10 +26,5 @@ function check_error () {
 
 function unzip($file, $destination)
 {
-    $shell = new-object -com shell.application
-    $zip = $shell.NameSpace($file)
-    foreach($item in $zip.items())
-    {
-        $shell.Namespace($destination).copyhere($item)
-    }
+    & unzip.exe -q "$file" -d "$destination"
 }

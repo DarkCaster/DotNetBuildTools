@@ -39,6 +39,10 @@ $patch_dir="$tools_dir\patch"
 $patch_exe="$patch_dir\patch.exe"
 $patch_dist="$script_dir\dist\patch\patch.zip"
 
+$unzip_dir="$tools_dir\unzip"
+$unzip_exe="$unzip_dir\unzip.exe"
+$unzip_exe_dist="$script_dir\dist\unzip\unzip.exe"
+
 if(!(Test-Path "$temp_dir"))
 {
     log "Creating temp dir at $temp_dir"
@@ -52,6 +56,18 @@ if(!(Test-Path "$tools_dir"))
     mkdir -Force "$tools_dir" | Out-Null
     check_error
 }
+
+if(!(Test-Path -PathType Leaf "$unzip_exe"))
+{
+    log "Creating unzip dir at $unzip_dir"
+    mkdir -Force "$unzip_dir" | Out-Null
+    check_error
+    log "Copying unzip exe from $unzip_exe_dist"
+    cp "$unzip_exe_dist" "$unzip_dir\unzip.exe"
+    check_error
+}
+
+$env:Path += ";$unzip_dir"
 
 if(!(Test-Path -PathType Leaf "$nuget_exe"))
 {
