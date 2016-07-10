@@ -146,7 +146,7 @@ foreach ($tgt in $targets)
     if(Test-Path -PathType Container "$temp_dir\$tgt")
     {
         log "Copying $temp_dir\$tgt dir contents to dist dir"
-        Copy-Item -Path "$temp_dir\$tgt" -Destination "dist" -recurse -Force
+        Copy-Item -Path "$temp_dir\$tgt\*" -Destination "dist" -recurse -Force
         check_error_cleanup
     }
     elseif(Test-Path -PathType Leaf "$temp_dir\$tgt")
