@@ -115,7 +115,7 @@ $curdir=Get-Location
 cd "$recipes_dir"
 check_error
 
-$recipes=Get-ChildItem -Depth 1 -File -Filter *.recipe | Sort-Object name
+$recipes=Get-ChildItem -File -Filter *.recipe | Sort-Object name
 
 ForEach ($recipe in $recipes)
 {
