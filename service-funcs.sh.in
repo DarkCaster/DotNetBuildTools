@@ -1,26 +1,25 @@
 #!/bin/bash
 
-test "z$script_dir" = "z" && script_dir="$( cd "$( dirname "$0" )" && pwd )"
-test "z$log_file" = "z" && log_file="$script_dir/logfile.txt"
+[[ -z $script_dir ]] && script_dir="$( cd "$( dirname "$0" )" && pwd )"
+[[ -z $log_file ]] && log_file="$script_dir/logfile.txt"
 
 log () {
- local msg="$@"
- local mark=`date +%Y/%m/%d-%H:%M:%S`
- echo "[ $mark ] $msg"
- echo "[ $mark ] $msg" >> "$log_file"
- true
+  local msg="$@"
+  local mark=`date +%Y/%m/%d-%H:%M:%S`
+  echo "[ $mark ] $msg"
+  echo "[ $mark ] $msg" >> "$log_file"
+  true
 }
 
 clear_log () {
- local mark=`date +%Y/%m/%d-%H:%M:%S`
- echo "[ $mark ] Logfile cleared" > "$log_file"
- true
+  local mark=`date +%Y/%m/%d-%H:%M:%S`
+  echo "[ $mark ] Logfile cleared" > "$log_file"
+  true
 }
 
 check_error () {
-if [ "$?" != "0" ]; then
- log "Error detected in last command"
- exit 1
-fi
+  if [[ $? != 0 ]]; then
+    log "Error detected in last command"
+    exit 1
+  fi
 }
-
