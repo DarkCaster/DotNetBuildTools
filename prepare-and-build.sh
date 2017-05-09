@@ -26,12 +26,12 @@ tools_dir="$temp_dir/tools"
 
 nuget_dir="$tools_dir/nuget"
 nuget_exe="$nuget_dir/nuget.exe"
-nuget_exe_dist="$script_dir/dist/nuget/nuget-3.4.4.exe"
+nuget_exe_dist="$script_dir/dist/nuget/nuget-4.1.0.exe"
 
 
 cake_dir="$tools_dir/cake"
 cake_exe="$cake_dir/Cake.exe"
-cake_dist="$script_dir/dist/cake/Cake-bin-v0.13.0.zip"
+cake_dist="$script_dir/dist/cake/Cake-bin-net45-v0.19.5.zip"
 
 if [ ! -d "$temp_dir" ]; then
  log "Creating temp dir at $temp_dir"
